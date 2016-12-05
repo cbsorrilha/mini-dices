@@ -5,32 +5,57 @@ window.helper = (function () {
        this.name = "TypeException";
     }
 
+    function NotFoundException(message) {
+       this.message = message;
+       this.name = "TypeException";
+    }
+
     function isNumber(val){
         return typeof val === "number";
     }
 
-    db = (function () {
+    function isObject(object) {
+        return object instanceof Object
+    }
 
-        function save(id, array) {
-            if (!isNumber(id)) {
-                throw new TypeException("Primeiro parâmetro precisa ser um número");
+    var db = (function () {
+
+        function save(obj) {
+            var db = JSON.parse(localStorage.db || "[]");
+
+            if (!isObject(obj)) {
+                throw new TypeException("Segundo parâmetro precisa ser um Objeto");
             }
-            if (!Array.isArray(array)) {
-                throw new TypeException("Segundo parâmetro precisa ser um Array");
-            }
-            localStorage.setItem(id, JSON.stringify(array));
+
+            db.push(obj);
+
+            localStorage.setItem('db', JSON.stringify(db));
         }
 
         function get(id) {
             if (!isNumber(id)) {
-                throw new TypeException("Primeiro parâmetro precisa ser um número");
+                throw new TypeException("Primeiro parâmetro precisa ser um número.");
             }
-            return JSON.parse(localStorage[id]);
+            var dice = JSON.parse(localStorage.db)[id]
+            if (!dice) {
+                throw new NotFoundException("Esse registro não pode ser encontrado.");
+            }
+            return ;
+        }
+
+        function getAll() {
+            var db = JSON.parse(localStorage.db || "[]");
+            return db;
+        }
+
+        function autoIncrements() {
+            return Object.keys(getAll()).length + 1;
         }
 
         return {
             "save": save,
-            "get": get
+            "get": get,
+            "getAll": getAll
         };
     }());
 
