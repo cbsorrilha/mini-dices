@@ -7,8 +7,49 @@
     </head>
     <body>
 
-        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="dices">
+                    <div class="dices-listContainer well">
+                        <ul>
+
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <a class="dice btn btn-default" data-type="100">d100</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
         <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
-        <script src="dbHelper.js" type="text/javascript"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="helper.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function addNewDice(diceType, result) {
+                var jogador = '<span class="jogador">Você</span>';
+                var diceType = '<span class="diceType">' + diceType + '</span>';
+                var result = '<span class="result">' + result + '</span>';
+                var dice =  "<li>" + jogador + " jogou um " + diceType + " e tirou um " + result + "</li>";
+                $('.dices-listContainer ul').append(dice);
+            }
+            $(document).ready(function () {
+
+                $('.dice').click(function () {
+                    var diceType = $(this).attr('data-type');
+                    var randomResult = helper.random(1,100);
+                    addNewDice(diceType, randomResult);
+
+
+                });
+
+            });
+        </script>
     </body>
 </html>
