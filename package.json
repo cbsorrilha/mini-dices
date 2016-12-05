@@ -1,0 +1,13 @@
+{
+  "name": "mini-dices",
+  "version": "1.0.0",
+  "description": "Mini-dices para tutorial de programação",
+  "main": "index.js",
+  "repository": "git@github.com:cbsorrilha/mini-dices.git",
+  "author": "Cesar de Barros <cbsorrilha@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1"
+  }
+}
