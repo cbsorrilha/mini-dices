@@ -1,8 +1,8 @@
 window.helper = (function () {
 
     function TypeException(message) {
-       this.message = message;
-       this.name = "TypeException";
+        this.message = message;
+        this.name = "TypeException";
     }
 
     function isNumber(val){
